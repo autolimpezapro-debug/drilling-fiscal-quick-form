@@ -51,8 +51,8 @@ export const formularioInicial = (): FormularioFiscal => ({
   transportadoraRazao: "",
   transportadoraCnpj: "",
   transportadoraAntt: "",
-  tipoOperacao: TIPOS_OPERACAO[0],
-  origem: ORIGENS[0],
+  tipoOperacao: TIPOS_OPERACAO[0]!,
+  origem: ORIGENS[0]!,
   origemOutro: "",
   destinoObra: "",
   destinoEndereco: "",
@@ -145,7 +145,7 @@ export async function enviarPreEmissao(
 
   const resposta = await fetch(API_URL, { method: "POST", body });
   const texto = await resposta.text();
-  let json: Record<string, unknown> = {};
+  let json: { ok?: boolean; erro?: string; protocolo?: string } = {};
   try {
     json = JSON.parse(texto);
   } catch {
